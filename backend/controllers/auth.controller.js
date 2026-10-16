@@ -24,8 +24,8 @@ export const signUp = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENVIRONMENT === "production",
-      // secure: (process.env.NODE_ENVIRONMENT = "production"),
-      sameSite: "strict",
+      secure:true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res.status(201).json({ message: "register successfully", user });
@@ -57,8 +57,8 @@ export const login = async (req,res) => {
     let token = await genToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: (process.env.NODE_ENVIRONMENT = "production"),
-      sameSite: "strict",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res.status(200).json({ message: "logged IN successfully", user });
